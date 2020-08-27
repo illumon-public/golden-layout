@@ -428,8 +428,8 @@ lm.utils.copy( lm.utils.DragListener.prototype, {
 
 			// after dragStop, so that .lm_dragging is removed after size is processed
 			// and any overflow: hidden remains applied during the calculations
-			this._eBody.removeClass( 'lm_dragging' );
-			this._eElement.removeClass( 'lm_dragging' );
+			if ( this._eBody ) this._eBody.removeClass( 'lm_dragging' );
+			if ( this._eElement ) this._eElement.removeClass( 'lm_dragging' );
 
 			if (this._destroyAfterMouseUp) this.destroy();
 			
@@ -971,7 +971,7 @@ lm.utils.copy( lm.LayoutManager.prototype, {
 	 */
 	createDragSourceFromEvent: function( itemConfig, event ) {
 		this.config.settings.constrainDragToContainer = false;
-		new lm.controls.DragSourceFromEvent(itemConfig, this, event );
+		new lm.controls.DragSourceFromEvent( itemConfig, this, event );
 	},
 
 
@@ -2401,6 +2401,8 @@ lm.utils.copy( lm.controls.DragSourceFromEvent.prototype, {
 	_destroy: function () {
 		this._dragListener = null;
 		this._element = null;
+		this._itemConfig = null;
+		this._layoutManager = null;
 	},
 	
 	/**
@@ -3235,6 +3237,8 @@ lm.utils.copy( lm.controls.Splitter.prototype, {
 	},
 
 	_$destroy: function() {
+		this._dragListener.destroy();
+		this._dragListener = null;
 		this.element.remove();
 	},
 

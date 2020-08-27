@@ -105,8 +105,8 @@ lm.utils.copy( lm.utils.DragListener.prototype, {
 
 			// after dragStop, so that .lm_dragging is removed after size is processed
 			// and any overflow: hidden remains applied during the calculations
-			this._eBody.removeClass( 'lm_dragging' );
-			this._eElement.removeClass( 'lm_dragging' );
+			if ( this._eBody ) this._eBody.removeClass( 'lm_dragging' );
+			if ( this._eElement ) this._eElement.removeClass( 'lm_dragging' );
 
 			if (this._destroyAfterMouseUp) this.destroy();
 			

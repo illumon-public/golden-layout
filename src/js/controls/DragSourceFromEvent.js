@@ -42,6 +42,8 @@ lm.utils.copy( lm.controls.DragSourceFromEvent.prototype, {
 	_destroy: function () {
 		this._dragListener = null;
 		this._element = null;
+		this._itemConfig = null;
+		this._layoutManager = null;
 	},
 	
 	/**
