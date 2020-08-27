@@ -971,7 +971,7 @@ lm.utils.copy( lm.LayoutManager.prototype, {
 	 */
 	createDragSourceFromEvent: function( itemConfig, event ) {
 		this.config.settings.constrainDragToContainer = false;
-		new lm.controls.DragSourceFromEvent( itemConfig, this, event );
+		return new lm.controls.DragSourceFromEvent( itemConfig, this, event );
 	},
 
 
