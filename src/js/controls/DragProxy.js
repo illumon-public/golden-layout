@@ -50,9 +50,14 @@ lm.controls.DragProxy = function( x, y, dragListener, layoutManager, contentItem
 
 	this._updateTree();
 	this._layoutManager._$calculateItemAreas();
-	this._setDimensions();
 
 	$( document.body ).append( this.element );
+
+	// pretty sure set dimensions belongs here, after this.element is actually added to the dom
+	// otherwise anything listening for the show event and needing size will be 0
+	// probably didn't matter to most people, as html stuff would have still worked fine
+	// but canvas draws depend on the new proxy size being supplied to redraw proxy correctly
+	this._setDimensions();
 
 	// there's no content tab to use yet, use the proxy tab size for placeholder sizing, after it's created
 	if (!this._contentItem.tab && this._proxyTab.length) {
